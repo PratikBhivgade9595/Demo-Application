@@ -1,0 +1,71 @@
+<div class="mx-auto" style="width: 200px; color: purple;">
+    <h2><b>Add New Product</b></h2>
+</div>
+<div class="main-div">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1">User Name:</b>
+                <input formControlName="name" placeholder="Your name">
+            </label>
+            <div *ngIf="myForm.get('name')?.invalid && (myForm.get('name')?.dirty || myForm.get('name')?.touched)"
+                class="text">
+                Please provide a user name.
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1">Item Code :</b>
+                <input formControlName="code" placeholder="Your item code">
+            </label>
+            <div *ngIf="myForm.get('code')?.invalid && (myForm.get('code')?.dirty || myForm.get('code')?.touched)"
+                class="text">
+                Please provide a valid 6 digit Item Code between (110001 - 999999).
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1">Description:</b>
+                <textarea formControlName="description" placeholder="Your description"></textarea>
+            </label>
+            <div *ngIf="myForm.get('description')?.invalid && (myForm.get('description')?.dirty || myForm.get('description')?.touched)"
+                class="text">
+                please provide description.
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1">Packaging:</b>
+                <input formControlName="packaging" placeholder="Your packaging">
+            </label>
+            <div *ngIf="myForm.get('packaging')?.invalid && (myForm.get('packaging')?.dirty || myForm.get('packaging')?.touched)"
+                class="text">
+                please provide packaging.
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1">Unit:</b>
+                <input formControlName="unit" placeholder="Your unit">
+            </label>
+            <div *ngIf="myForm.get('unit')?.invalid && (myForm.get('unit')?.dirty || myForm.get('unit')?.touched)"
+                class="text">
+                please provide unit.
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <label>
+                <b class="text-1"> Photo:</b>
+                <input formControlName="photo" placeholder="photo">
+            </label>
+            <div *ngIf="myForm.get('photo')?.invalid && (myForm.get('photo')?.dirty || myForm.get('photo')?.touched)"
+                class="text">
+                photo required.
+            </div>
+        </div>
+        <div class="mx-auto p-2" style="width: 200px;">
+            <button type="submit" [disabled]="myForm.invalid" class="btn btn-success mx-auto p-2"
+                style="width: 183px;">Add Product</button>
+        </div>
+    </form>
+</div>

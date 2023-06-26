@@ -1,0 +1,16 @@
+<div class="mx-auto" style="width: 200px; color: purple;">
+    <h1><b>Show Product</b></h1>
+</div>
+<div *ngIf="isLoading">
+    <!-- Loading indicator -->
+    <h3 class="mx-auto" style="width: 200px; color: yellowgreen;">Loading...</h3>
+</div>
+<div *ngIf="!isLoading">
+    <div *ngFor="let item of productDetails">
+        <p><b>Item Code: </b>{{ item.ItemCode }}</p>
+        <p><b>Description: </b>{{ item.Description }}</p>
+        <p><b>Package: </b>{{ item.Package }}</p>
+        <p><b>Unit: </b>{{ item.Unit }}</p>
+        <p><b>Item Photo: </b>{{ item.ItemPhoto }}</p>
+    </div>
+</div>
