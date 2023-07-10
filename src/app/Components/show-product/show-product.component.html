@@ -11,6 +11,6 @@
         <p><b>Description: </b>{{ item.Description }}</p>
         <p><b>Package: </b>{{ item.Package }}</p>
         <p><b>Unit: </b>{{ item.Unit }}</p>
-        <p><b>Item Photo: </b>{{ item.ItemPhoto }}</p>
+        <img [src]="'data:image/jpg;base64,'+item.ItemPhoto" style="height:300px;width:300px" />
     </div>
 </div>
