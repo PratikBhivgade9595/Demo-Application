@@ -5,12 +5,102 @@
     <!-- Loading indicator -->
     <h3 class="mx-auto" style="width: 200px; color: yellowgreen;">Loading...</h3>
 </div>
-<div *ngIf="!isLoading">
-    <div *ngFor="let item of productDetails">
-        <p><b>Item Code: </b>{{ item.ItemCode }}</p>
-        <p><b>Description: </b>{{ item.Description }}</p>
-        <p><b>Package: </b>{{ item.Package }}</p>
-        <p><b>Unit: </b>{{ item.Unit }}</p>
-        <img [src]="'data:image/jpg;base64,'+item.ItemPhoto" style="height:300px;width:300px" />
+
+<div class="table-responsive" class="mx-auto">
+
+    <table class="table table-bordered" *ngIf="!isLoading">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Item Code</th>
+                <th scope="col">Description</th>
+                <th scope="col">Package</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productDetails">
+                <td>{{ item.ItemCode }}</td>
+                <td>{{ item.Description }}</td>
+                <td>{{ item.Package }}</td>
+                <td>{{ item.Unit }}</td>
+                <td><img [src]="'data:image/jpg;base64,'+item.ItemPhoto" style="height:80px;width:80px" /></td>
+                <td>
+                    &nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" (click)="editProduct(item.ItemCode,item.Description,item.Package,item.Unit)">
+                        Edit</button> &nbsp; &nbsp;
+                    <button type="button" class="btn btn-danger" (click)="deleteData(item)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit and Update</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+                    <div class="mx-auto p-2" style="width: 200px;">
+                        <label>
+                            <b class="text-1">Item Code :</b>
+                            <input formControlName="code" placeholder="Your item code">
+                        </label>
+                        <div *ngIf="myForm.get('code')?.invalid && (myForm.get('code')?.dirty || myForm.get('code')?.touched)"
+                            class="text">
+                            Please provide a valid 6 digit Item Code between (110001 - 999999).
+                        </div>
+                    </div>
+                    <div class="mx-auto p-2" style="width: 200px;">
+                        <label>
+                            <b class="text-1">Description:</b>
+                            <textarea formControlName="description" placeholder="Your description"></textarea>
+                        </label>
+                        <div *ngIf="myForm.get('description')?.invalid && (myForm.get('description')?.dirty || myForm.get('description')?.touched)"
+                            class="text">
+                            please provide description.
+                        </div>
+                    </div>
+                    <div class="mx-auto p-2" style="width: 200px;">
+                        <label>
+                            <b class="text-1">Packaging:</b>
+                            <input formControlName="packaging" placeholder="Your packaging">
+                        </label>
+                        <div *ngIf="myForm.get('packaging')?.invalid && (myForm.get('packaging')?.dirty || myForm.get('packaging')?.touched)"
+                            class="text">
+                            please provide packaging.
+                        </div>
+                    </div>
+                    <div class="mx-auto p-2" style="width: 200px;">
+                        <label>
+                            <b class="text-1">Unit:</b>
+                            <input formControlName="unit" placeholder="Your unit">
+                        </label>
+                        <div *ngIf="myForm.get('unit')?.invalid && (myForm.get('unit')?.dirty || myForm.get('unit')?.touched)"
+                            class="text">
+                            please provide unit.
+                        </div>
+                    </div>
+                    <div class="mx-auto p-2" style="width: 200px;">
+                        <button type="submit" [disabled]="myForm.invalid" class="btn btn-success mx-auto p-2"
+                            style="width: 183px;">Update Product</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Update</button> -->
+            </div>
+        </div>
     </div>
 </div>

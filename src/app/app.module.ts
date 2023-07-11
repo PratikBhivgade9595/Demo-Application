@@ -11,6 +11,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpdateProductComponent } from './Components/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     AddProductComponent,
     ShowProductComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,
