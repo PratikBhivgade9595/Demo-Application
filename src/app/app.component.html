@@ -1,4 +1,8 @@
-
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  
+<app-headerss (newEvent)="addEvent = $event;"></app-headerss>
+<!-- <app-header></app-header> -->
+<main>
+  <app-navside [addEvent]="addEvent" [ngClass]="{'nav-list-open': addEvent}" class="bg-dark border-bottom border-bottom-dark" data-bs-theme="dark px-2"></app-navside>
+  <div class="body-content" [ngClass]="{'nav-list-shrink': addEvent}">
+    <router-outlet></router-outlet>
+  </div>
+</main>

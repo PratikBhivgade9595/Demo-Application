@@ -1,0 +1,12 @@
+<div class="side-nav-con">
+    <ul class="nav-list" [ngClass]="{'nav-list-open': addEvent}">
+        <li class="nav-list-item" *ngFor="let item of List">
+            <div (click)="route(item.name)">
+                <i class="{{item.icon}}"></i>
+                <span>
+                    <a>{{item.name}}</a>
+                </span>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateProductComponent } from './Components/update-product/update-product.component';
+import { HeaderssComponent } from './Components/headerss/headerss.component';
+import { NavsideComponent } from './Components/navside/navside.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { UpdateProductComponent } from './Components/update-product/update-produ
     AddProductComponent,
     ShowProductComponent,
     HomeComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    HeaderssComponent,
+    NavsideComponent
   ],
   imports: [
     BrowserModule,

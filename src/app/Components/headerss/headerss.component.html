@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark px-2">
+
+    <div class="p-2 me-3 text-light side-nav nav"(click)="eventItem()">
+        <i class="fa-solid fa-bars size"></i>
+    </div>
+    <a class="navbar-brand" ><i style="color: whitesmoke;">Welcome To Dashboard Page</i></a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink='/' style="color: white;"><i></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/addProduct' style="color: white;"><i></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/showProduct' style="color: white;"><i></i></a>
+          </li>
+        </ul>
+        <form class="d-flex me-2" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="color: white;">
+          <button class="btn btn-outline-success" style="color: white;" type="submit">Search</button>
+        </form>
+      </div>
+</nav>

@@ -1,36 +1,129 @@
-<div class="mx-auto" style="width: 200px; color: purple;">
+<!-- <div class="mx-auto" style="width: 200px; color: purple;">
     <h1><b>Show Product</b></h1>
+</div> -->
+
+<!-- Button trigger modal -->
+<div class="button-add">
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal-1">
+        <i class="fa-solid fa-file-pen"> Add Product</i>
+    </button>
+    <!-- <input type="text" #box  placeholder="Enter User Name" class="form-control input">
+    <button (click)="getVal(box.value)">Enter</button> -->
 </div>
-<div *ngIf="isLoading">
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="exampleModal-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: purple; "><b>Add Product</b></h1> -->
+                <i class="fa-solid fa-file-pen size-1"> Add Product</i>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="refresh()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="myAddForm" (ngSubmit)="onSubmitAddPrd(myAddForm)">
+                    <div>
+                        <label class="content-display-6">
+                            <b class="fa-solid" style="padding-top: 20px;">User Name:</b>
+                            <input formControlName="name" placeholder="Your name" class="input">
+                        </label>
+                        <div *ngIf="myAddForm.get('name')?.invalid && (myAddForm.get('name')?.dirty || myAddForm.get('name')?.touched)"
+                            class="text">
+                            Please provide a user name.
+                        </div>
+                    </div>
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-1">
+                            <b class="text-1 font-size fa-solid" style="padding-top: 20px;">Item Code :</b>
+                            <input formControlName="code" placeholder="Your item code" class="input">
+                        </label>
+                        <div *ngIf="myAddForm.get('code')?.invalid && (myAddForm.get('code')?.dirty || myAddForm.get('code')?.touched)"
+                            class="text">
+                            Please provide a valid 6 digit Item Code between (110001 - 999999).
+                        </div>
+                    </div>
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-2">
+                            <b class="text-1 font-size fa-solid" style="padding-top: 20px;">Description:</b>
+                            <input formControlName="description" placeholder="Your description" class="input">
+                        </label>
+                        <div *ngIf="myAddForm.get('description')?.invalid && (myAddForm.get('description')?.dirty || myAddForm.get('description')?.touched)"
+                            class="text">
+                            please provide description.
+                        </div>
+                    </div>
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-3">
+                            <b class="text-1 font-size fa-solid" style="padding-top: 20px;">Packaging:</b>
+                            <input formControlName="packaging" placeholder="Your packaging" class="input">
+                        </label>
+                        <div *ngIf="myAddForm.get('packaging')?.invalid && (myAddForm.get('packaging')?.dirty || myAddForm.get('packaging')?.touched)"
+                            class="text">
+                            please provide packaging.
+                        </div>
+                    </div>
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-4">
+                            <b class="text-1 font-size fa-solid" style="padding-top: 20px;">Unit:</b>
+                            <input formControlName="unit" placeholder="Your unit" class="input">
+                        </label>
+                        <div *ngIf="myAddForm.get('unit')?.invalid && (myAddForm.get('unit')?.dirty || myAddForm.get('unit')?.touched)"
+                            class="text">
+                            please provide unit.
+                        </div>
+                    </div>
+                    <div style="padding-top: 15px; padding-bottom: 10px;">
+                        <label class="content-display-5">
+                            <b class="text-1 font-size fa-solid" style="padding-top: 20px;"> Photo:</b>
+                            <input type="file" formControlName="photo" (change)="handleFileInput($event)" placeholder="photo" class="input">
+                            <!-- <input formControlName="photo" placeholder="photo" class="input"> -->
+                        </label>
+                        <div *ngIf="myAddForm.get('photo')?.invalid && (myAddForm.get('photo')?.dirty || myAddForm.get('photo')?.touched)"
+                            class="text">
+                            photo required.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" [disabled]="myAddForm.invalid" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary " data-bs-dismiss="modal" (click)="refresh()">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Update</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isLoading" style="padding-top: 65px;">
     <!-- Loading indicator -->
     <h3 class="mx-auto" style="width: 200px; color: yellowgreen;">Loading...</h3>
 </div>
 
-<div class="table-responsive" class="mx-auto">
+<div class="table-responsive mx-auto ms-5 me-5" style="padding-top: 20px;">
 
     <table class="table table-bordered" *ngIf="!isLoading">
         <thead class="table-dark">
-            <tr>
-                <th scope="col">Item Code</th>
-                <th scope="col">Description</th>
-                <th scope="col">Package</th>
-                <th scope="col">Unit</th>
-                <th scope="col">Image</th>
-                <th scope="col">Action</th>
+            <tr class="align-text font-size">
+                <th scope="col"><i>Item Code</i></th>
+                <th scope="col"><i>Description</i></th>
+                <th scope="col"><i>Package</i></th>
+                <th scope="col"><i>Unit</i></th>
+                <th scope="col"><i>Image</i></th>
+                <th scope="col"><i>Action</i></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of productDetails">
-                <td>{{ item.ItemCode }}</td>
-                <td>{{ item.Description }}</td>
-                <td>{{ item.Package }}</td>
-                <td>{{ item.Unit }}</td>
+            <tr *ngFor="let item of productDetails" class="align-text">
+                <td class="font-center">{{ item.ItemCode }}</td>
+                <td class="font-center">{{ item.Description }}</td>
+                <td class="font-center">{{ item.Package }}</td>
+                <td class="font-center">{{ item.Unit }}</td>
                 <td><img [src]="'data:image/jpg;base64,'+item.ItemPhoto" style="height:80px;width:80px" /></td>
-                <td>
-                    &nbsp; <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" (click)="editProduct(item.ItemCode,item.Description,item.Package,item.Unit)">
-                        Edit</button> &nbsp; &nbsp;
-                    <button type="button" class="btn btn-danger" (click)="deleteData(item)">Delete</button>
+                <td style="padding-top: 31px;">
+                    &nbsp; <button type="button" class="btn" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        (click)="editProduct(item.ItemCode,item.Description,item.Package,item.Unit)"><i class="fa-solid fa-pen-to-square size" style="color: blue;"></i>
+                        </button> &nbsp; &nbsp;
+                    <button type="button" class="btn" (click)="deleteData(item)"><i class="fa-sharp fa-solid fa-trash size" style="color: red;"></i></button>
                 </td>
             </tr>
         </tbody>
@@ -46,61 +139,67 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit and Update</h1>
+                <!-- <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: purple; "><b>Edit and Update</b></h1> -->
+                <i class="fa-solid fa-pen-to-square size-1"> Edit Product</i>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-                    <div class="mx-auto p-2" style="width: 200px;">
-                        <label>
-                            <b class="text-1">Item Code :</b>
-                            <input formControlName="code" placeholder="Your item code">
+                    <div>
+                        <label class="content-display-1">
+                            <b class="fa-solid" style="padding-top: 20px;">Item Code :</b>
+                            <input formControlName="code" placeholder="Your item code" class="input">
                         </label>
                         <div *ngIf="myForm.get('code')?.invalid && (myForm.get('code')?.dirty || myForm.get('code')?.touched)"
                             class="text">
                             Please provide a valid 6 digit Item Code between (110001 - 999999).
                         </div>
                     </div>
-                    <div class="mx-auto p-2" style="width: 200px;">
-                        <label>
-                            <b class="text-1">Description:</b>
-                            <textarea formControlName="description" placeholder="Your description"></textarea>
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-2">
+                            <b class="fa-solid" style="padding-top: 20px;">Description:</b>
+                            <input formControlName="description" placeholder="Your description" class="input">
                         </label>
                         <div *ngIf="myForm.get('description')?.invalid && (myForm.get('description')?.dirty || myForm.get('description')?.touched)"
                             class="text">
                             please provide description.
                         </div>
                     </div>
-                    <div class="mx-auto p-2" style="width: 200px;">
-                        <label>
-                            <b class="text-1">Packaging:</b>
-                            <input formControlName="packaging" placeholder="Your packaging">
+                    <div style="padding-top: 15px;">
+                        <label class="content-display-3">
+                            <b class="fa-solid" style="padding-top: 20px;">Packaging:</b>
+                            <input formControlName="packaging" placeholder="Your packaging" class="input">
                         </label>
                         <div *ngIf="myForm.get('packaging')?.invalid && (myForm.get('packaging')?.dirty || myForm.get('packaging')?.touched)"
                             class="text">
                             please provide packaging.
                         </div>
                     </div>
-                    <div class="mx-auto p-2" style="width: 200px;">
-                        <label>
-                            <b class="text-1">Unit:</b>
-                            <input formControlName="unit" placeholder="Your unit">
+                    <div style="padding-top: 15px; padding-bottom: 10px;">
+                        <label class="content-display-4">
+                            <b class="fa-solid" style="padding-top: 20px;">Unit:</b>
+                            <input formControlName="unit" placeholder="Your unit" class="input">
                         </label>
                         <div *ngIf="myForm.get('unit')?.invalid && (myForm.get('unit')?.dirty || myForm.get('unit')?.touched)"
                             class="text">
                             please provide unit.
                         </div>
                     </div>
-                    <div class="mx-auto p-2" style="width: 200px;">
+                    <!-- <div class="mx-auto p-2" style="width: 200px;">
                         <button type="submit" [disabled]="myForm.invalid" class="btn btn-success mx-auto p-2"
                             style="width: 183px;">Update Product</button>
+                    </div> -->
+                    <div class="modal-footer">
+                        <button type="submit" [disabled]="myForm.invalid" class="btn btn-success">Update</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Update</button> -->
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Update</button> -->
-            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <!-- <button type="button" class="btn btn-primary">Update</button> -->
+            <!-- </div> -->
         </div>
     </div>
 </div>

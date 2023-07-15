@@ -1,0 +1,90 @@
+.modal.fade.show {
+    backdrop-filter: blur(5px);
+}
+
+.align-text {
+    text-align: center;
+    font-size: large;
+    gap: 100px;
+    
+}
+
+.font-center {
+    padding-top: 40px;
+    //color: purple;
+}
+
+.content {
+   display: flex;
+   text-align: center; 
+}
+
+.align {
+    gap: 100px;
+}
+
+.text {
+    color: red;
+}
+
+// .text-1 {
+//     color: rgb(165, 42, 69);
+// }
+
+
+
+.input {
+    padding: 3px;
+    box-shadow: 3px 3px 5px grey;
+    font-size: 14px;
+    //font-weight: 600;
+    width: 250px;
+    height: 50px;
+  }
+
+.content-display-1 {
+    display: flex;
+    gap: 49px;
+}  
+
+.content-display-2 {
+    display: flex;
+    gap: 32px;
+}  
+
+.content-display-3 {
+    display: flex;
+    gap: 46px;
+}  
+
+.content-display-4 {
+    display: flex;
+    gap: 99px;
+}  
+
+.content-display-5 {
+    display: flex;
+    gap: 83px;
+}  
+
+.content-display-6 {
+    display: flex;
+    gap: 55px;
+} 
+
+.button-add {
+    padding-left: 35px;
+    padding-top: 10px;
+}
+
+.size {
+    font-size: 40px;
+    text-align: center;
+    line-height: 25px; 
+}
+
+.size-1 {
+    font-size: 20px;
+}
+
+
